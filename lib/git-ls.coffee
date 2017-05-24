@@ -45,12 +45,9 @@ module.exports = (ProviderBase) ->
       @updateItems(items)
 
     getItems: ->
-      onItems = @updateItems
       finished = 0
       onFinish = (project) =>
-        finished++
-        if finished is projects.length
-          @finishUpdateItems()
+        @finishUpdateItems() if ++finished is projects.length
 
       projects = atom.project.getPaths()
       for project in projects
