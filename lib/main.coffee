@@ -13,16 +13,22 @@ module.exports =
     negateNarrowQueryByEndingExclamation: true
     revealOnStartCondition: 'never'
   )
+
   activate: ->
+    consumeNarrowServicePromise = new Promise (resolve) =>
+      @resolveNarrowService = resolve
+
+    @subscriptions = new CompositeDisposable
+    @subscriptions.add atom.commands.add 'atom-text-editor',
+      'narrow:git-ls': ->
+        atom.commands.dispatch(this, 'narrow:activate-package')
+        consumeNarrowServicePromise.then (service) ->
+          require('./git-ls')
+          service.narrow('GitLs')
 
   deactivate: ->
     @subscriptions?.dispose()
     {@subscriptions} = {}
 
   consumeNarrow: (service) ->
-    {ProviderBase, narrow, settings} = service
-    @subscriptions = new CompositeDisposable
-    require('./git-ls')(ProviderBase)
-
-    @subscriptions.add atom.commands.add 'atom-text-editor',
-      'narrow:git-ls': -> narrow('GitLs')
+    @resolveNarrowService(service)
