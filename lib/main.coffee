@@ -6,6 +6,8 @@ requireFrom = (pack, path) ->
 
 settings = requireFrom('narrow', 'lib/settings')
 
+narrow = null
+
 module.exports =
   config: settings.createProviderConfig(
     autoPreview: false
@@ -21,14 +23,18 @@ module.exports =
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-text-editor',
       'narrow:git-ls': ->
-        atom.commands.dispatch(this, 'narrow:activate-package')
-        consumeNarrowServicePromise.then (service) ->
-          require('./git-ls')
-          service.narrow('GitLs')
+        if service?
+          narrow('git-ls')
+        else
+          atom.commands.dispatch(this, 'narrow:activate-package')
+          consumeNarrowServicePromise.then ->
+            narrow('git-ls')
 
   deactivate: ->
     @subscriptions?.dispose()
     {@subscriptions} = {}
 
   consumeNarrow: (service) ->
+    {narrow, registerProvider} = service
+    registerProvider('git-ls', require.resolve('./git-ls'))
     @resolveNarrowService(service)

@@ -19,7 +19,6 @@ ProviderBase = requireFrom('narrow', 'lib/provider/provider-base')
 module.exports =
 class GitLs extends ProviderBase
   @configScope: 'narrow-git-ls'
-  @registerProvider(this)
 
   showLineHeader: false
   supportReopen: true
