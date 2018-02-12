@@ -8,13 +8,15 @@
 
 ## Keymaps
 
-No default keymap. Here is example, set it in your `keymap.cson`
+No default keymap.
+Set keymap in your `keymap.cson` by yourself.
+
+This is my keymap
 
 ```coffeescript
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
   'ctrl-p': 'narrow:git-ls'
 ```
-
 
 ## Known issue
 
