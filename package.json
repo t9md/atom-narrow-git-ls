@@ -19,5 +19,26 @@
         "1.0.0": "consumeNarrow"
       }
     }
+  },
+  "scripts": {
+    "lint": "standard lib/*.js lib/**/*.js spec/*.js"
+  },
+  "devDependencies": {
+    "prettier": "^1.10.2",
+    "standard": "^10.0.3"
+  },
+  "standard": {
+    "env": {
+      "atomtest": true,
+      "browser": true,
+      "jasmine": true,
+      "node": true
+    },
+    "globals": [
+      "atom"
+    ],
+    "ignore": [
+      "spec/fixtures/*"
+    ]
   }
 }
