@@ -8,10 +8,9 @@
 
 ## Keymaps
 
-- No default keymap.
-- Set keymap in your `keymap.cson` by yourself.
-
-- This is my keymap
+No default keymap.  
+Set keymap in your `keymap.cson` by yourself.  
+This is my keymap  
 
 ```coffeescript
 'atom-text-editor.vim-mode-plus:not(.insert-mode)':
