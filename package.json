@@ -16,7 +16,7 @@
   "consumedServices": {
     "narrow": {
       "versions": {
-        "1.0.0": "consumeNarrow"
+        "2.0.0": "consumeNarrow"
       }
     }
   },
